@@ -14,7 +14,7 @@ func main() {
 	if os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE") != "" {
 		ecrHelper := ecr.GetECRCredentialHelper()
 		RegistryMain(ecrHelper)
-	} else if os.Getenv("GOOGLE_CLOuD_PROVIDER") == "" {
+	} else if os.Getenv("GOOGLE_CLOuD_PROVIDER") != "" {
 		gcrHelper := gcr.GetGCRCredentialHelper()
 		RegistryMain(gcrHelper)
 	} else {
