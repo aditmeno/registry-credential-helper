@@ -11,14 +11,14 @@ import (
 )
 
 func main() {
-	if os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE") != "" {
+	if os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE") != "" || os.Getenv("AWS_ACCESS_KEY_ID") != "" || os.Getenv("AWS_SDK_LOAD_CONFIG") != "" {
 		ecrHelper := ecr.GetECRCredentialHelper()
 		RegistryMain(ecrHelper)
 	} else if os.Getenv("GOOGLE_CLOUD_PROVIDER") != "" {
 		gcrHelper := gcr.GetGCRCredentialHelper()
 		RegistryMain(gcrHelper)
 	} else {
-		log.Fatal("Couldn't determine Cloud Provider")
+		log.Fatal("Couldn't determine Cloud Provider!")
 	}
 }
 
