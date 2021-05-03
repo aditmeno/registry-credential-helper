@@ -30,8 +30,8 @@ func (credHelper *GCRCredentialHelper) Login() {
 }
 
 func (credHelper *GCRCredentialHelper) GetToken() string {
-	apiToken := getToken()
-	return apiToken
+	credHelper.Token = getToken()
+	return credHelper.Token
 }
 
 func login() {
