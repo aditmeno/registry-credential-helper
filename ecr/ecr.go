@@ -5,8 +5,6 @@ import (
 	"log"
 	"os"
 
-	aws "github.com/aws/aws-sdk-go/aws"
-	awsSTSCreds "github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	awsSession "github.com/aws/aws-sdk-go/aws/session"
 	awsECR "github.com/aws/aws-sdk-go/service/ecr"
 
@@ -38,11 +36,7 @@ func (credHelper *ECRCredentialHelper) GetToken() string {
 
 func login() *awsECR.ECR {
 	awsSession := awsSession.Must(awsSession.NewSession())
-	if os.Getenv("ECR_ASSUME_ROLE") == "" {
-		log.Fatal("Role to assume is missing!")
-	}
-	creds := awsSTSCreds.NewCredentials(awsSession, os.Getenv("ECR_ASSUME_ROLE"))
-	ecrSession := awsECR.New(awsSession, &aws.Config{Credentials: creds})
+	ecrSession := awsECR.New(awsSession)
 	return ecrSession
 }
 
